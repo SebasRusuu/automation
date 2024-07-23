@@ -1,3 +1,5 @@
+package com.mercedes_benz.qa;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -25,7 +27,6 @@ class BasicFrameWork1Test {
 
         //Google
         var shadowHost = driver.findElement(By.cssSelector("cmm-cookie-banner")).getShadowRoot();
-        System.out.println("Shadow host found: " + (shadowHost != null));
         shadowHost.findElement(By.cssSelector("[data-test='handle-accept-all-button']")).click();
 
         var selectElementSelect = driver.findElement(By.cssSelector("[data-test-id='modal-popup__location'] select"));
