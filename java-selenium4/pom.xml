@@ -17,6 +17,7 @@
     <modules>
         <module>garbage</module>
         <module>poor</module>
+        <module>fair</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
