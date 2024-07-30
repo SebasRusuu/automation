@@ -12,19 +12,22 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <org.seleniumhq.selenium.version>4.22.0</org.seleniumhq.selenium.version>
     </properties>
 
     <modules>
         <module>garbage</module>
         <module>poor</module>
         <module>fair</module>
+        <module>good</module>
+        <module>very-good</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.22.0</version>
+            <version>${org.seleniumhq.selenium.version}</version>
         </dependency>
 
         <dependency>
