@@ -13,6 +13,11 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.seleniumhq.selenium.version>4.22.0</org.seleniumhq.selenium.version>
+        <io.qameta.allure.version>2.27.0</io.qameta.allure.version>
+        <io.qameta.allure.maven.version>2.12.0</io.qameta.allure.maven.version>
+        <org.slf4j.version>2.0.13</org.slf4j.version>
+        <org.junit.jupiter.version>5.11.0-M2</org.junit.jupiter.version>
+        <ch.qos.logback.version>1.4.11</ch.qos.logback.version>
     </properties>
 
     <modules>
@@ -21,6 +26,7 @@
         <module>fair</module>
         <module>good</module>
         <module>very-good</module>
+        <module>exccelent</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
@@ -33,8 +39,35 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.11.0-M2</version>
+            <version>${org.junit.jupiter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>${io.qameta.allure.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${org.slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${ch.qos.logback.version}</version>
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${io.qameta.allure.maven.version}</version>
+                <configuration>
+                    <reportVersion>${io.qameta.allure.version}</reportVersion>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
