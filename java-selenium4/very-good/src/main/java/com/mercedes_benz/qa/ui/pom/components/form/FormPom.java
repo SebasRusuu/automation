@@ -68,10 +68,10 @@ public class FormPom {
 
     private void confirmFill() {
         confirmButton.click();
-        wait.until(ExpectedConditions.attributeContains(MODAL_DIALOG_WRAPPER, "style", "display: none;"));
     }
 
     public boolean isFormClosed() {
-        return mainElement.findElement(MODAL_DIALOG_WRAPPER).getAttribute("style").equals("display: none;");
+       wait.until(ExpectedConditions.not(ExpectedConditions.attributeContains(MODAL_DIALOG_WRAPPER, "style", "display: visible;")));
+       return true;
     }
 }

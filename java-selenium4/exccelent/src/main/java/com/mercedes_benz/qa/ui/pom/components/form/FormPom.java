@@ -14,7 +14,6 @@ import org.openqa.selenium.support.ui.Select;
  * It provides methods to interact with and fill out the form.
  */
 public class FormPom {
-
     /**
      * Web element representing the state select dropdown.
      */

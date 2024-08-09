@@ -5,18 +5,34 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.Browser;
 
 /**
- * This enum provides a method to parse a string into a {@link Browser} enum type.
+ * This enum represents different types of browsers and provides methods to work with them.
  */
 @Getter
 public enum BrowserType {
+    /**
+     * Represents the Firefox browser.
+     */
     FIREFOX(Browser.FIREFOX),
+
+    /**
+     * Represents the Chrome browser.
+     */
     CHROME(Browser.CHROME);
 
+    /**
+     * The browser type.
+     */
     private final Browser browser;
 
-    BrowserType(Browser browser) {
-        this.browser = browser;
+    /**
+     * Constructor to initialize the browser type.
+     *
+     * @param browserType the browser type
+     */
+    BrowserType(final Browser browserType) {
+        this.browser = browserType;
     }
+
     /**
      * Parses a string representation of a browser type into a {@link Browser} enum.
      *

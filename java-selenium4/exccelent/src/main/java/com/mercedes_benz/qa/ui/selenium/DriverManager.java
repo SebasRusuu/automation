@@ -16,33 +16,30 @@ import static org.openqa.selenium.remote.Browser.CHROME;
 import static org.openqa.selenium.remote.Browser.FIREFOX;
 
 /**
- * This class manages the WebDriver instances for different browser types.
+ * Manages the WebDriver instance and browser configurations.
  */
 public class DriverManager {
     /**
      * The WebDriver instance.
      */
     private WebDriver driver;
-    /**
-     * The browser type to be used.
-     */
 
     /**
-     * The SeleniumReader instance to read the Selenium configuration properties.
+     * The SeleniumReader instance to read configuration data.
      */
     private final SeleniumReader seleniumReader;
 
     /**
-     * Constructor to initialize the DriverManager with a specific browser type.
+     * Constructor to initialize the SeleniumReader.
      *
-     * @param browser the browser type to be used (e.g., CHROME, FIREFOX)
+     * @throws IOException if an I/O error occurs
      */
-    public DriverManager(final Browser browser) throws IOException {
+    public DriverManager() throws IOException {
         this.seleniumReader = new SeleniumReader();
     }
 
     /**
-     * Returns the WebDriver instance. If the driver is not initialized, it creates a new instance.
+     * Returns the WebDriver instance, creating it if necessary.
      *
      * @return the WebDriver instance
      */
@@ -54,30 +51,28 @@ public class DriverManager {
     }
 
     /**
-     * Creates a new WebDriver instance based on the specified browser type.
+     * Creates a new WebDriver instance.
      *
-     * @return the WebDriver instance
+     * @return the created WebDriver instance
      */
     private WebDriver createDriver() {
         return createLocalDriver();
     }
 
     /**
-     * Creates a local WebDriver instance for the specified browser type.
+     * Creates a local WebDriver instance based on the browser type.
      *
-     * @return the WebDriver instance
+     * @return the created WebDriver instance
      */
     private WebDriver createLocalDriver() {
-
-        setWindowMaximize();
         driver = initBrowser();
-        getDriver().manage().timeouts().implicitlyWait(seleniumReader.getImplicitWait());
+        setWindowMaximize();
+        driver.manage().timeouts().implicitlyWait(seleniumReader.getImplicitWait());
         return driver;
     }
 
-
     /**
-     * Sets the window to maximize if the browserFullScreen property is set to true.
+     * Maximizes the browser window if the configuration specifies full screen.
      */
     private void setWindowMaximize() {
         if (seleniumReader.getBrowserFullScreen()) {
@@ -85,7 +80,12 @@ public class DriverManager {
         }
     }
 
-    private WebDriver initBrowser (){
+    /**
+     * Initializes the browser based on the configuration.
+     *
+     * @return the initialized WebDriver instance
+     */
+    public WebDriver initBrowser() {
         Browser browser = seleniumReader.getBrowserType();
         return switch (browser.browserName()) {
             case "chrome" -> new ChromeDriver((ChromeOptions) getCapabilities(browser));
@@ -94,6 +94,22 @@ public class DriverManager {
         };
     }
 
+    /**
+     * Returns the browser type as a string.
+     *
+     * @return the browser type
+     */
+    public String getBrowserType() {
+        Browser browser = seleniumReader.getBrowserType();
+        return browser.browserName();
+    }
+
+    /**
+     * Returns the capabilities for the specified browser.
+     *
+     * @param browser the browser type
+     * @return the capabilities for the browser
+     */
     private Capabilities getCapabilities(final Browser browser) {
         var isHeadless = seleniumReader.isBrowserHeadless();
         if (browser.equals(CHROME)) {
