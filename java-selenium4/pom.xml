@@ -27,6 +27,7 @@
         <module>good</module>
         <module>very-good</module>
         <module>exccelent</module>
+        <module>outstanding</module>
     </modules>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
