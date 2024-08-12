@@ -18,9 +18,6 @@ public class MbPage extends LoadableComponent<MbPage> {
     private final WebDriver driver;
     private final WebDriverWait wait;
 
-    private static final By SHADOW_HOST = By.cssSelector("cmm-cookie-banner");
-
-
     public MbPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -36,7 +33,7 @@ public class MbPage extends LoadableComponent<MbPage> {
     protected void isLoaded() throws Error {
         String url = driver.getCurrentUrl();
         if (!url.equals("https://shop.mercedes-benz.com/en-au/shop/vehicle/srp/demo")) {
-            throw new Error("The page is not loaded");
+            throw new Error("The page has not been loaded");
         }
     }
 
