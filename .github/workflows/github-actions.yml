@@ -28,8 +28,5 @@ jobs:
       - name: Run tests
         run: mvn clean test
 
-      - name: Move to directory "Outstanding"
-        run: cd java-selenium4/outstanding
-
       - name: Generate Allure report
         run: cd java-selenium4/outstanding && mvn allure:report
