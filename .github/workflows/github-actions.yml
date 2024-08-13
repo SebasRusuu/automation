@@ -22,12 +22,6 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Set up Allure
-        run: |
-          sudo apt-add-repository ppa:qameta/allure -y
-          sudo apt-get update
-          sudo apt-get install allure -y
-
       - name: Install dependencies
         run: mvn install -DskipTests
 
