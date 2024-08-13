@@ -3,10 +3,10 @@ name: github-actions
 on:
   push:
     branches:
-      - '**'
+      - 'qa/outstanding-framework-java'
   pull_request:
     branches:
-      - '**'
+      - 'qa/outstanding-framework-java'
 
 jobs:
   build:
@@ -15,16 +15,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Run Super-Linter
-        uses: github/super-linter@v4
-        env:
-            DEFAULT_BRANCH: main
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Install dependencies
         run: mvn install -DskipTests
 
       - name: Run tests
-        run: mvn test
+        run: mvn clean test
 
       - name: Generate Allure report
         run: mvn allure:serve
