@@ -5,6 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
@@ -12,31 +13,21 @@ jobs:
           java-version: 21
       - name: Run tests
         run: make test-outstanding
-      - name: Get Allure history´
-        uses: actions/checkout@v2
+
+      - name: Load test report history
+        uses: actions/checkout@v3
         if: always()
         continue-on-error: true
         with:
           ref: gh-pages
           path: gh-pages
-      - name: Test local action
-        uses: ./allure-report-action
+      - name: Build test report
+        uses: simple-elf/allure-report-action@v1.7
         if: always()
-        id: allure-report
         with:
-          allure_results: build/allure-results
           gh_pages: gh-pages
-          allure_report: allure-report
           allure_history: allure-history
-      - name: Test marketplace action
-        uses: simple-elf/allure-report-action@master
-        if: always()
-        id: allure-report
-        with:
           allure_results: build/allure-results
-          gh_pages: gh-pages
-          allure_report: allure-report
-          allure_history: allure-history
       - name: Deploy report to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v2
