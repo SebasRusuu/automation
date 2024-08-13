@@ -1,11 +1,8 @@
-test:
-	mvn test
-
-test-outstanding:
-	cd java-selenium4/outstanding && make test && make report
-
 build:
 	mvn clean install -DskipTests
+
+test:
+	mvn test
 
 report:
 	mvn allure:report
