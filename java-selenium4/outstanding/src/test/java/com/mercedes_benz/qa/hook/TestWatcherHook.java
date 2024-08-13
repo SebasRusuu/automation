@@ -4,6 +4,8 @@ import com.mercedes_benz.qa.ui.selenium.DriverManager;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -17,9 +19,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 public class TestWatcherHook implements TestWatcher {
 
@@ -28,20 +27,8 @@ public class TestWatcherHook implements TestWatcher {
     @RegisterExtension
     public final TestWatcher testWatcher = new TestWatch();
 
-    protected static final Logger logger = Logger.getLogger(TestWatcherHook.class.getName());
-    protected static File logFile;
+    protected static final Logger logger = LogManager.getLogger(TestWatcherHook.class.getName());
     String browserType;
-
-    static {
-        try {
-            logFile = new File("test-log.log");
-            FileHandler fileHandler = new FileHandler(logFile.getAbsolutePath(), false); // Overwrite mode
-            fileHandler.setFormatter(new SimpleFormatter());
-            logger.addHandler(fileHandler);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void log(String message) {
         logger.info(message);

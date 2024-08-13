@@ -10,6 +10,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
+import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.Assertions;
@@ -59,25 +60,15 @@ class OutstandingTest extends TestWatcherHook {
     @Test
     @DisplayName("Web Test - Fill Form")
     @Description("Test accept cookies, fill the form and confirm it")
+    @Step("StartUp")
     void testHomePage() {
-        log("Starting testHomePage");
         MbPage mbPage = new MbPage(driverManager.getDriver());
         mbPage.get();
-        log("Navigated to MbPage");
         CookiePom cookiePom = mbPage.getCookie();
         cookiePom.acceptCookies();
-        log("Accepted cookies");
         Assertions.assertTrue(cookiePom.isCookieClosed());
-        log("Cookie banner closed");
         FormPom formPom = mbPage.getForm();
-        log("Navigated to FormPom");
         formPom.fillForm(form);
-        log("Filling form with the following details:");
-        log("State: " + form.getStateLoc());
-        log("Postal Code: " + form.getPostalCode());
-        log("Purpose: " + form.getPurposeValue());
-        log("Form filled");
         Assertions.assertTrue(formPom.isFormClosed());
-        log("Form closed");
     }
 }

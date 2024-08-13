@@ -2,7 +2,7 @@ build:
 	mvn clean install -DskipTests
 
 test:
-	mvn test
+	mvn test && mvn allure:report
 
 report:
 	mvn allure:report
