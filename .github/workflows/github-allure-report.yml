@@ -13,27 +13,44 @@ jobs:
           java-version: 21
       - name: Run tests
         run: make test-outstanding
-
-      - name: Load test report history
-        uses: actions/checkout@v3
+      - name: Get Allure history´
+        uses: actions/checkout@v2
         if: always()
         continue-on-error: true
         with:
           ref: gh-pages
           path: gh-pages
-
-      - name: Build test report
-        uses: simple-elf/allure-report-action@v1.7
+      - name: Test local action
+        uses: ./allure-report-action
         if: always()
+        id: allure-report
         with:
-          gh_pages: gh-pages
-          allure_history: allure-history
           allure_results: build/allure-results
-
-      - name: Publish test report
-        uses: peaceiris/actions-gh-pages@v3
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
+      - name: Test marketplace action
+        uses: simple-elf/allure-report-action@master
         if: always()
+        id: allure-report
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: allure-history
+          allure_results: build/allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
+      - name: Post the link to the report
+        if: always()
+        uses: Sibz/github-status-action@v1
+        with:
+          authToken: ${{secrets.GITHUB_TOKEN}}
+          context: 'Test report'
+          state: 'success'
+          sha: ${{ github.event.pull_request.head.sha }}
+          target_url: simple-elf.github.io/github-allure-history/${{ github.run_number }}
