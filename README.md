@@ -1,6 +1,9 @@
 # First Automation - Sebastião Rusu
-This is my first automation project.
-It's dedicated to Open the web -> accept cookies -> fill the form and confirmed it.
+#### This is my first automation project.
+- It's dedicated to Open the web 
+- Accept cookies 
+- Fill the form 
+- Confirm if the form was sent successfully
 -----
 
 ## 🛠️ Setup Project
