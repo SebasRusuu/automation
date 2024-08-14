@@ -1,0 +1,28 @@
+name: Run tests and publish report
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 21
+
+      - name: Run tests
+        run: make test-outstanding
+
+      - name: Check Allure results directory
+        run: ls -l
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: artifact-allure-report
+          path: java-selenium4/outstanding/target/site/allure-maven-plugin
+          if-no-files-found: error
+          retention-days: 1
+          overwrite: true
+          compression-level: 6

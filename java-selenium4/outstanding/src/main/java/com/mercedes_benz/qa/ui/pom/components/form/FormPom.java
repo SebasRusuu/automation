@@ -2,6 +2,9 @@ package com.mercedes_benz.qa.ui.pom.components.form;
 
 import com.mercedes_benz.qa.ui.data.Form;
 import com.mercedes_benz.qa.ui.data.Purpose;
+import io.qameta.allure.Step;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -56,6 +59,12 @@ public class FormPom {
     private WebElement businessCheckbox;
 
     /**
+     * Logger instance to log messages.
+     */
+
+    private static final Logger logger = LogManager.getLogger(FormPom.class.getName());
+
+    /**
      * Constructor for FormPom.
      *
      * @param driver the WebDriver instance to interact with the web page
@@ -77,11 +86,14 @@ public class FormPom {
      *
      * @param form the Form object containing data to fill out the form
      */
+    @Step("Fill form")
     public void fillForm(final Form form) {
         stateSelect(form.getStateLoc());
         postalCodeFill(form.getPostalCode());
         purposeCheck(form.getPurposeValue());
         confirmFill();
+        logger.info("Filling form with data:{}", form);
+        logger.info("Form filled successfully and closed");
     }
 
     /**
@@ -89,6 +101,7 @@ public class FormPom {
      *
      * @param state the state to select
      */
+    @Step("Select state")
     private void stateSelect(final String state) {
         Select select = new Select(stateSelect);
         select.selectByVisibleText(state);
@@ -99,6 +112,7 @@ public class FormPom {
      *
      * @param postalCode the postal code to enter
      */
+    @Step("Fill postal code")
     private void postalCodeFill(final String postalCode) {
         postalCodeInput.sendKeys(postalCode);
     }
@@ -108,6 +122,7 @@ public class FormPom {
      *
      * @param purpose the purpose to select
      */
+    @Step("Check purpose")
     private void purposeCheck(final Purpose purpose) {
         JavascriptExecutor js = (JavascriptExecutor) formDriver;
         js.executeScript("arguments[0].click();", purpose.equals(Purpose.PRIVATE) ? privateCheckbox : businessCheckbox);
@@ -116,6 +131,7 @@ public class FormPom {
     /**
      * Clicks the confirm button to submit the form.
      */
+    @Step("Confirm form")
     private void confirmFill() {
         confirmButton.click();
     }
@@ -125,6 +141,7 @@ public class FormPom {
      *
      * @return true if the modal dialog is closed, false otherwise
      */
+    @Step("Check if form is closed")
     public boolean isFormClosed() {
         return modalDialogWrapper.getAttribute("style").contains("display: none;");
     }
