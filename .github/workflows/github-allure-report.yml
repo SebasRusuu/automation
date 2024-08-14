@@ -15,19 +15,14 @@ jobs:
       - name: Run tests
         run: make test-outstanding
 
-      - name: Build test report
-        uses: simple-elf/allure-report-action@v1.7
-        if: always()
-        with:
-          gh_pages: gh-pages
-          allure_history: allure-history
-          allure_results: build/allure-results
+      - name: Check Allure results directory
+        run: ls -l
 
       - uses: actions/upload-artifact@v4
         with:
           name: artifact-allure-report
-          path: target/allure-results
+          path: target/site/allure-maven-plugin
           if-no-files-found: error
           retention-days: 1
           overwrite: true
-
+          compression-level: 6
