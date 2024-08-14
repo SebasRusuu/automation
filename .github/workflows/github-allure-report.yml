@@ -11,15 +11,10 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 21
+
       - name: Run tests
         run: make test-outstanding
-      - name: Load test report history
-        uses: actions/checkout@v3
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
+
       - name: Build test report
         uses: simple-elf/allure-report-action@v1.7
         if: always()
@@ -27,3 +22,12 @@ jobs:
           gh_pages: gh-pages
           allure_history: allure-history
           allure_results: build/allure-results
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: artifact-allure-report
+          path: /outstanding/target/site/allure-maven-plugin/index.html
+          if-no-files-found: error
+          retention-days: 1
+          overwrite: true
+
