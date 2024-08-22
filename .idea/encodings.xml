@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/java-selenium4/exccelent/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/java-selenium4/exccelent/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/java-selenium4/fair/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/java-selenium4/fair/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/java-selenium4/garbage/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/java-selenium4/garbage/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/java-selenium4/good/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/java-selenium4/good/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/java-selenium4/outstanding/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/java-selenium4/outstanding/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/java-selenium4/poor/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/java-selenium4/poor/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/java-selenium4/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/java-selenium4/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/java-selenium4/very-good/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/java-selenium4/very-good/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/site/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/site/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

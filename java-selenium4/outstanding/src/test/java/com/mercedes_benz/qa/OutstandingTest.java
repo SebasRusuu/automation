@@ -13,6 +13,7 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
+import io.restassured.RestAssured;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,6 +26,9 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
+import static io.restassured.RestAssured.given;
+import static org.apache.http.HttpStatus.SC_OK;
+
 @Owner("Sebastião Rusu")
 @Epic("Automation")
 @Feature("Web")
@@ -32,21 +36,28 @@ import java.util.Objects;
 class OutstandingTest extends TestWatcherHook {
 
     private Form form;
+    private String countryCode;
 
     @TmsLink("Sebastião Rusu")
     @DisplayName("Setup Test")
     @BeforeEach
     void setUp() throws IOException {
-        log("Setting up the test");
+        // Get countryCode from system properties, which is set by Maven command line
+        countryCode = System.getProperty("countryCode", "en-au");
+        log("Setting up the test for country: " + countryCode);
+        RestAssured.baseURI = String.format("https://shop.mercedes-benz.com/%s/shop/vehicle/srp/demo", countryCode);
+        given().
+                when().get().
+                then().statusCode(SC_OK);
+
         InputStream is = this.getClass().getClassLoader().getResourceAsStream("Data.json");
         StringBuilder jsonString = new StringBuilder();
-        try (InputStreamReader streamReader = new InputStreamReader(Objects.requireNonNull(is), StandardCharsets.UTF_8); BufferedReader reader = new BufferedReader(streamReader)) {
-
+        try (InputStreamReader streamReader = new InputStreamReader(Objects.requireNonNull(is), StandardCharsets.UTF_8);
+             BufferedReader reader = new BufferedReader(streamReader)) {
             String line;
             while ((line = reader.readLine()) != null) {
                 jsonString.append(line);
             }
-
         } catch (IOException e) {
             log("Error reading JSON file: " + e.getMessage());
             e.printStackTrace();

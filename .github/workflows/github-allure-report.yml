@@ -15,9 +15,6 @@ jobs:
       - name: Run tests
         run: make test-outstanding
 
-      - name: Check Allure results directory
-        run: ls -l
-
       - uses: actions/upload-artifact@v4
         with:
           name: artifact-allure-report
