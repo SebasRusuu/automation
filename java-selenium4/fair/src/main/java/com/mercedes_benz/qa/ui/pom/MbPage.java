@@ -7,14 +7,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class MbPage {
     private final WebDriver driver;
-    private final static  String URL = "https://shop.mercedes-benz.com/en-au/shop/vehicle/srp/demo";
-    private final static  String SHADOW_HOST = "cmm-cookie-banner";
+    private static final String URL = "https://shop.mercedes-benz.com/en-au/shop/vehicle/srp/demo";
+    private static final String SHADOW_HOST = "cmm-cookie-banner";
 
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    private static final Logger logger = LogManager.getLogManager().getLogger(MbPage.class.getName());
 
 
     public MbPage(WebDriver driver) {

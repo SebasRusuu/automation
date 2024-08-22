@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://www.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>groupId</groupId>
@@ -7,7 +7,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>outstanding</artifactId>
-    <name>Archetype - fair</name>
+    <name>Archetype - outstanding</name>
     <url>http://maven.apache.org</url>
     <properties>
         <org.seleniumhq.selenium.version>4.23.0</org.seleniumhq.selenium.version>
@@ -45,6 +45,12 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -75,7 +81,6 @@
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -99,4 +104,29 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <profiles>
+        <profile>
+            <id>en-au</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <countryCode>en-au</countryCode>
+            </properties>
+        </profile>
+        <profile>
+            <id>fr-fr</id>
+            <properties>
+                <countryCode>fr-fr</countryCode>
+            </properties>
+        </profile>
+        <profile>
+            <id>sk-sk</id>
+            <properties>
+                <countryCode>sk-sk</countryCode>
+            </properties>
+        </profile>
+    </profiles>
+
 </project>
