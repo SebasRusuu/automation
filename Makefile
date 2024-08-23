@@ -14,5 +14,5 @@ checkstyle:
 	mvn checkstyle:checkstyle
 
 web:
-	cd site && yarn install && GIT_USER=${GITHUB_ACTOR} USE_SSH=false GIT_TOKEN=${GIT_HUB_TOKEN} yarn run deploy
+	cd site && yarn install && yarn run deploy
 

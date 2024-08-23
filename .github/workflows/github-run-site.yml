@@ -13,20 +13,17 @@ jobs:
           cache: yarn
           cache-dependency-path: site/package-lock.json
 
-      - name: Install dependencies
-        run: |
-          cd site
-          yarn install
+#      - name: Install dependencies
+ #       run: |
+  #        cd site
+   #       yarn install
 
-      - name: Test build website
-        run: |
-          cd site
-          yarn build
+    #  - name: Test build website
+     #    cd site
+      #    yarn build
 
       - name: Deploy Site
         run: make web
         env:
           GIT_USER: ${{ secrets.GIT_USER }}
           GIT_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}
-          GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
-          CUSTOM_COMMIT_MESSAGE: ${{ secrets.CUSTOM_COMMIT_MESSAGE }}
