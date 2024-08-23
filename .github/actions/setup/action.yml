@@ -31,6 +31,7 @@ runs:
       shell: bash
       run: |
         echo "Setting up environment variables"
+        echo "SSH_PRIVATE_KEY=${{ secrets.SSH_PRIVATE_KEY }}" >> $GITHUB_ENV
         echo "GIT_USER=${{ inputs.GIT_USER }}" >> $GITHUB_ENV
         echo "GIT_PASS=${{ inputs.GIT_PASS }}" >> $GITHUB_ENV
         echo "GIT_HUB_TOKEN=${{ secrets.GIT_HUB_TOKEN }}" >> $GITHUB_ENV
