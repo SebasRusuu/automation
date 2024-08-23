@@ -14,5 +14,8 @@ checkstyle:
 	mvn checkstyle:checkstyle
 
 .PHONY: web
-web:
-	cd site && npm install && npm run deploy
+folder-web:
+	cd site && make deploy
+
+deploy:
+	npm install && npm run deploy
