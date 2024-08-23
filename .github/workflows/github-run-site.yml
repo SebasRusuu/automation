@@ -3,6 +3,9 @@ on: [push]
 
 jobs:
   deploy:
+    permissions:
+      pages: write
+      id-token: write
     runs-on: ubuntu-latest
 
     steps:
@@ -11,6 +14,7 @@ jobs:
 
       - name: Setup Environment
         uses: ./.github/actions/setup
+
       - name: Deploy Site
         run: make web
         env:
