@@ -15,5 +15,5 @@ jobs:
       - name: Deploy Site
         run: make web
         env:
-          GITHUB_USER: ${{ secrets.GIT_USER }}
+          GIT_USER: ${{ secrets.GIT_USER }}
           GIT_HUB_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}
