@@ -20,6 +20,7 @@ jobs:
 
       - name: Test build website
         run: |
+          cd site
           yarn build
 
 #      - name: Deploy Site
