@@ -14,4 +14,4 @@ checkstyle:
 	mvn checkstyle:checkstyle
 
 web:
-	npm install && npm run deploy
+	cd site && npm install && npm run deploy
