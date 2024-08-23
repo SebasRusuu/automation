@@ -13,13 +13,14 @@ jobs:
           cache: yarn
           cache-dependency-path: site/package-lock.json
       - name: Install Dependencies
-        run: yarn install
+        run: |
+          make web
         working-directory: site
 
-      - name: Deploy Site
-        run: make web
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
         env:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          GIT_USER: ${{ secrets.GIT_USER }}
-          GIT_PASSWORD: ${{ secrets.GIT_PASS }}
-          GIT_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
