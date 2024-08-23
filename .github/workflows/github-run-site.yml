@@ -11,6 +11,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Move to Site
+        run: cd site
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
@@ -18,7 +21,8 @@ jobs:
             cache: npm
 
       - name: Test build website
-        run: npm build
+        run: |
+          npm build
 
       - name: Deploy Site
         run: make web
