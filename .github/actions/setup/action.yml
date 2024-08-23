@@ -22,7 +22,6 @@ runs:
         node-version: 18
         cache: yarn
         cache-dependency-path: site/package-lock.json
-
     - name: Install Dependencies
       shell: bash
       run: yarn install
