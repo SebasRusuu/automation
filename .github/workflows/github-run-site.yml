@@ -7,7 +7,7 @@ jobs:
 
     steps:
       - name: change directory
-        run: cd /Users/rususeba/IdeaProjects/automation/site
+        run: cd site
 
       - name: run website build
         run: make web
