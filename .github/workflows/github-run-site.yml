@@ -16,4 +16,5 @@ jobs:
         run: make web
         env:
           GIT_USER: ${{ secrets.GIT_USER }}
+          GIT_PASS: ${{ secrets.GIT_PASS }}
           GIT_HUB_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}
