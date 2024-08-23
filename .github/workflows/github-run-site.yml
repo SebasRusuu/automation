@@ -13,15 +13,6 @@ jobs:
           cache: yarn
           cache-dependency-path: site/package-lock.json
 
-#      - name: Install dependencies
- #       run: |
-  #        cd site
-   #       yarn install
-
-    #  - name: Test build website
-     #    cd site
-      #    yarn build
-
       - uses: webfactory/ssh-agent@v0.5.4
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
