@@ -23,11 +23,11 @@ jobs:
           cd site
           yarn build
 
-#      - name: Deploy Site
-#        run: make web
-#        env:
-#          GIT_USER: ${{ secrets.GIT_USER }}
-#          GIT_PASS: ${{ secrets.GIT_PASS }}
-#          GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
-#          GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
-#          CUSTOM_COMMIT_MESSAGE: ${{ secrets.CUSTOM_COMMIT_MESSAGE }}
+      - name: Deploy Site
+        run: make web
+        env:
+          GIT_USER: ${{ secrets.GIT_USER }}
+          GIT_PASS: ${{ secrets.GIT_PASS }}
+          GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
+          GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
+          CUSTOM_COMMIT_MESSAGE: ${{ secrets.CUSTOM_COMMIT_MESSAGE }}
