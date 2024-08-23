@@ -14,4 +14,4 @@ checkstyle:
 	mvn checkstyle:checkstyle
 
 web:
-	cd site && yarn install && yarn run deploy
+	cd site && yarn run deploy
