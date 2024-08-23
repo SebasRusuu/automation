@@ -13,8 +13,7 @@ jobs:
           cache: yarn
           cache-dependency-path: site/package-lock.json
       - name: Install Dependencies
-        run: |
-          make web
+        run: yarn install
         working-directory: site
 
       - name: Setup Pages
