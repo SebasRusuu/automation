@@ -32,4 +32,5 @@ runs:
       run: |
         echo "Setting up environment variables"
         echo "GIT_USER=${{ inputs.GIT_USER }}" >> $GITHUB_ENV
+        echo "GIT_PASS=${{ inputs.GIT_PASS }}" >> $GITHUB_ENV
         echo "GIT_HUB_TOKEN=${{ secrets.GIT_HUB_TOKEN }}" >> $GITHUB_ENV
