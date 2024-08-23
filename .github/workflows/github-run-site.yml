@@ -6,9 +6,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: change directory
+        run: cd /Users/rususeba/IdeaProjects/automation/site
 
       - name: run website build
-        run: make web-deploy
+        run: make web
         env:
           GIT_USER: ${{ secrets.GIT_USER }}
           GIT_PASS: ${{ secrets.GIT_PASS }}

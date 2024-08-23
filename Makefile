@@ -13,5 +13,5 @@ report:
 checkstyle:
 	mvn checkstyle:checkstyle
 
-web-deploy:
-	cd /Users/rususeba/IdeaProjects/automation/site && npm install && npm run deploy
+web:
+	npm install && npm run deploy
