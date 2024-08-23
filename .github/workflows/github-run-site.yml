@@ -3,10 +3,11 @@ on: [push]
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
     permissions:
       pages: write
       id-token: write
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
