@@ -14,5 +14,5 @@ checkstyle:
 	mvn checkstyle:checkstyle
 
 web:
-	cd site && yarn install && yarn run deploy
+	cd site && yarn install && USE_SSH=true yarn run deploy
 
