@@ -14,7 +14,9 @@ jobs:
             cache-dependency-path: site/package-lock.json
 
       - name: Install dependencies
-        run: yarn install
+        run: |
+          cd site
+          yarn install
 
       - name: Test build website
         run: |
