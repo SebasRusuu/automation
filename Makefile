@@ -13,5 +13,6 @@ report:
 checkstyle:
 	mvn checkstyle:checkstyle
 
+.PHONY: web
 web:
 	cd site && npm install && npm run deploy
