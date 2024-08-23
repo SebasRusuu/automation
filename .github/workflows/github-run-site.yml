@@ -24,6 +24,18 @@ jobs:
           GIT_HUB_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}
           url: ${{ steps.deployment.outputs.page_url }}
 
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "${{ secrets.GIT_USER }}"
+          git config --global user.email "${{ secrets.GIT_EMAIL }}"
+          git add .
+          git commit -m "Deploy site"
+          git push https://${{ secrets.GIT_USER }}:${{ secrets.GIT_PASS }}@github.com/SebasRusuu/automation.git HEAD:qa/outstanding-framework-java
+        env:
+          GIT_USER: ${{ secrets.GIT_USER }}
+          GIT_PASS: ${{ secrets.GIT_PASS }}
+          GIT_HUB_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
