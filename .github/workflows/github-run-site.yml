@@ -1,23 +1,43 @@
-name: Deploy Website
+name: Deploy to GitHub Pages
+
 on: [push]
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+permissions:
+  contents: write
 
+jobs:
+  test-deploy:
+    if: github.event_name != 'push'
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: yarn
-          cache-dependency-path: site/package-lock.json
-
-      - name: Deploy Site
-        run: make web
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Test build website
+        run: yarn build
+  deploy:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: yarn
+      - uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Deploy to GitHub Pages
         env:
-
-          GIT_USER: ${{ secrets.GIT_USER }}
-          GIT_PASSWORD: ${{ secrets.GIT_PASS }}
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          GIT_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}
+          USE_SSH: true
+        run: |
+          yarn install --frozen-lockfile
+          yarn deploy

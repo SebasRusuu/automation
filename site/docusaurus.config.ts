@@ -8,7 +8,7 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://sebasrusuu.github.io/',
+  url: 'https://sebasrusuu.github.io/automation/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -17,6 +17,7 @@ const config: Config = {
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'SebasRusuu', // Usually your GitHub org/user name.
   projectName: 'automation', // Usually your repo name.
+  deploymentBranch: 'gh-pages',
 
   onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'warn',
