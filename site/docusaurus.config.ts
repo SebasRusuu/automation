@@ -8,10 +8,10 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://sebasrusuu.github.io/automation/',
+  url: 'https://sebasrusuu.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/automation/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
