@@ -9,29 +9,29 @@ inputs:
   GIT_PASS:
     description: 'Git password'
     required: true
-  GIT_USER_EMAIL:
-    description: 'Git user email'
+  GIT_HUB_TOKEN:
+    description: 'GitHub token'
     required: true
-  CUSTOM_COMMIT_MESSAGE:
-    description: 'Custom commit message'
-    required: false
 
 runs:
   using: 'composite'
   steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
-        node-version: '16'
+        node-version: 18
+        cache: yarn
+        cache-dependency-path: site/package-lock.json
+
+    - name: Install Dependencies
+      shell: bash
+      run: yarn install
+      working-directory: site
 
     - name: Set Environment Variables
       shell: bash
       run: |
         echo "Setting up environment variables"
-        echo "SSH_PRIVATE_KEY=${{ secrets.SSH_PRIVATE_KEY }}" >> $GITHUB_ENV
         echo "GIT_USER=${{ inputs.GIT_USER }}" >> $GITHUB_ENV
         echo "GIT_PASS=${{ inputs.GIT_PASS }}" >> $GITHUB_ENV
-        echo "GIT_HUB_TOKEN=${{ secrets.GIT_HUB_TOKEN }}" >> $GITHUB_ENV
+        echo "GIT_HUB_TOKEN=${{ inputs.GIT_HUB_TOKEN }}" >> $GITHUB_ENV
