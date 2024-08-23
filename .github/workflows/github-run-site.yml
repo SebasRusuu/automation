@@ -4,15 +4,13 @@ on: [ push ]
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./site/
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Move to Site
-        run: cd site
 
       - name: Set up Node
         uses: actions/setup-node@v4
