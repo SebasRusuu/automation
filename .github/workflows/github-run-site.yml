@@ -21,5 +21,4 @@ jobs:
         env:
           GIT_USER: ${{ secrets.GIT_USER }}
           GIT_PASSWORD: ${{ secrets.GIT_PASS }}
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           GIT_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}
