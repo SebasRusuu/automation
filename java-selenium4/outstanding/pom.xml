@@ -18,6 +18,8 @@
         <org.apache.maven.surefire.plugins.version>3.2.5</org.apache.maven.surefire.plugins.version>
         <org.apache.logging.log4j.version>2.17.2</org.apache.logging.log4j.version>
         <aspectj.version>1.9.21</aspectj.version>
+        <countryCode>en-au</countryCode>
+
     </properties>
 
     <dependencies>
@@ -106,15 +108,6 @@
     </reporting>
 
     <profiles>
-        <profile>
-            <id>en-au</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <countryCode>en-au</countryCode>
-            </properties>
-        </profile>
         <profile>
             <id>fr-fr</id>
             <properties>

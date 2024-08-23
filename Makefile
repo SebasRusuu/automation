@@ -12,3 +12,6 @@ report:
 
 checkstyle:
 	mvn checkstyle:checkstyle
+
+web:
+	cd site && npm install && npm run deploy

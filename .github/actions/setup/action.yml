@@ -1,0 +1,38 @@
+name: 'Setup env'
+description: 'Action to setup environment variables'
+author: SebasRusuu
+
+inputs:
+  GIT_USER:
+    description: 'Git user'
+    required: true
+  GIT_PASS:
+    description: 'Git password'
+    required: true
+  GIT_USER_EMAIL:
+    description: 'Git user email'
+    required: true
+  CUSTOM_COMMIT_MESSAGE:
+    description: 'Custom commit message'
+    required: false
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Set Environment Variables
+      shell: bash
+      run: |
+        echo "Setting up environment variables"
+        echo "GIT_USER=${{ inputs.GIT_USER }}" >> $GITHUB_ENV
+        echo "GIT_PASS=${{ inputs.GIT_PASS }}" >> $GITHUB_ENV
+        echo "GIT_USER_NAME=${{ inputs.GIT_USER }}" >> $GITHUB_ENV
+        echo "GIT_USER_EMAIL=${{ inputs.GIT_USER_EMAIL }}" >> $GITHUB_ENV
+        echo "CUSTOM_COMMIT_MESSAGE=${{ inputs.CUSTOM_COMMIT_MESSAGE }}" >> $GITHUB_ENV

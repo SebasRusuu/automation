@@ -1,24 +1,17 @@
 name: Deploy Website
-on: [push]
+on: [ push ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-
-      - name: Change directory to site
-        run: cd site
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Deploy website
-        run: npm run deploy
+      - name: run website build
+        run: make web
+        env:
+          GIT_USER: ${{ secrets.GIT_USER }}
+          GIT_PASS: ${{ secrets.GIT_PASS }}
+          GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
+          GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
+          CUSTOM_COMMIT_MESSAGE: ${{ secrets.CUSTOM_COMMIT_MESSAGE }}
