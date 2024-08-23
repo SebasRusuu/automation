@@ -13,9 +13,5 @@ report:
 checkstyle:
 	mvn checkstyle:checkstyle
 
-.PHONY: web
-folder-web:
-	cd site && make deploy
-
-deploy:
-	npm install && npm run deploy
+web-deploy:
+	cd site && npm install && npm run deploy
