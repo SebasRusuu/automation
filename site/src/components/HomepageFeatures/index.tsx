@@ -2,10 +2,6 @@ import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
-type MainItem = {
-    title: string;
-};
-
 type FeatureItem = {
     subtitle: string;
     Svg: React.ComponentType<React.ComponentProps<'svg'>>;
@@ -16,12 +12,12 @@ const FeatureList: FeatureItem[] = [
     {
         subtitle: 'Objectives',
         Svg: require('@site/static/img/objectives.svg').default,
-        link:'/docs/Run%20project/install-project',
+        link:'docs/Objectives',
     },
     {
         subtitle: 'Documentation',
         Svg: require('@site/static/img/tools_programming.svg').default,
-        link:'/docs/Run%20project/install-project',
+        link:'docs/How%20to%20run',
     },
 ];
 
@@ -44,7 +40,7 @@ export default function HomepageFeatures(): JSX.Element {
     return (
         <section className={styles.features}>
             <div className="container">
-                <Heading as="h2" className="text--center">Clique nas imagens abaixo para saber mais</Heading>
+                <Heading as="h2" className="text--center">Click below to understand better</Heading>
                 <div className="row">
                     {FeatureList.map((props, idx) => (
                         <Feature key={idx} {...props} />
