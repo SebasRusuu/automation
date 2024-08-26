@@ -21,9 +21,9 @@ jobs:
         run: |
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
-          git remote set-url origin https://${{ secrets.GIT_USER }}:${{ secrets.GITHUB_TOKEN }}@github.com/SebasRusuu/automation.git
-          make web
+          yarn deploy
+        working-directory: site
+
         env:
           GIT_USER: ${{ secrets.GIT_USER }}
-          GIT_PASS: ${{ secrets.GIT_PASS }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_PASS: ${{ secrets.GIT_TOKEN }}

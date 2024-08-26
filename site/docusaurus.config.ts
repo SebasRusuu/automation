@@ -7,7 +7,7 @@ const config: Config = {
   tagline: 'Automate your life',
   favicon: 'img/favicon.ico',
 
-  url: 'https://sebasrusuu.github.io/',
+  url: 'https://sebasrusuu.github.io',
   baseUrl: '/automation/',
 
   organizationName: 'SebasRusuu',
