@@ -12,3 +12,7 @@ report:
 
 checkstyle:
 	mvn checkstyle:checkstyle
+
+web:
+	cd site && yarn install && yarn deploy
+

@@ -1,0 +1,31 @@
+name: 'Setup env'
+description: 'Action to setup environment variables'
+author: SebasRusuu
+
+inputs:
+  GITHUB_TOKEN:
+    description: 'GitHub token'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 18
+        cache: yarn
+        cache-dependency-path: site/package-lock.json
+
+    - name: Configure git
+      shell: bash
+      run: |
+        git config --global user.email "sebastiaotr.5@gmail.com"
+        git config --global user.name "SebasRusuu"
+
+    - name: Install Dependencies
+      shell: bash
+      run: |
+        yarn install
+      working-directory: site
+

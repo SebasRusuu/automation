@@ -1,0 +1,27 @@
+name: Deploy Website
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup
+
+      - name: Build Site
+        shell: bash
+        run: yarn build
+        working-directory: site
+
+      - name: Deploy Site
+        run: |
+          yarn deploy
+        working-directory: site
+
+        env:
+          GIT_USER: ${{ secrets.GIT_USER }}
+          GIT_PASS: ${{ secrets.GIT_HUB_TOKEN }}
