@@ -1,5 +1,5 @@
 name: Deploy Website
-on: [ push ]
+on: [push]
 
 jobs:
   deploy:
@@ -18,7 +18,7 @@ jobs:
         working-directory: site
 
       - name: Deploy Site
-        run:
+        run: |
           git config user.name "SebasRusuu"
           git config user.email "SebasRusuu@users.noreply.github.com"
           git remote set-url origin https://github.com/SebasRusuu/automation.git
