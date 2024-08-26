@@ -8,7 +8,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
+        with:
+          repository: 'sebasrusuu/automation'
       - name: Setup Environment
         uses: ./.github/actions/setup
 
