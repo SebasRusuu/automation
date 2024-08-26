@@ -17,7 +17,15 @@ runs:
         cache: yarn
         cache-dependency-path: site/package-lock.json
 
+    - name: Configure git
+      shell: bash
+      run: |
+        git config --global user.email "sebastiaotr.5@gmail.com"
+        git config --global user.name "SebasRusuu"
+
     - name: Install Dependencies
       shell: bash
-      run: yarn install
+      run: |
+        yarn install
       working-directory: site
+
