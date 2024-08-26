@@ -15,6 +15,11 @@ jobs:
       - name: Setup Environment
         uses: ./.github/actions/setup
 
+      - name: Build Site
+        shell: bash
+        run: yarn build
+        working-directory: site
+
       - name: Deploy Site
         run: make web
         env:
