@@ -28,10 +28,9 @@ runs:
       run: yarn install
       working-directory: site
 
-    - name: Set Environment Variables
+    - name: git config
       shell: bash
       run: |
-        echo "Setting up environment variables"
-        echo "GIT_USER=${{ inputs.GIT_USER }}" >> $GITHUB_ENV
-        echo "GIT_PASS=${{ inputs.GIT_PASS }}" >> $GITHUB_ENV
-        echo "GIT_HUB_TOKEN=${{ inputs.GIT_HUB_TOKEN }}" >> $GITHUB_ENV
+        git config user.name "${{ github.actor }}"
+        git config user.email "${{ github.actor }}@users.noreply.github.com"
+        git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
