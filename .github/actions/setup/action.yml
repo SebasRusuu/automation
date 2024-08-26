@@ -3,13 +3,7 @@ description: 'Action to setup environment variables'
 author: SebasRusuu
 
 inputs:
-  GIT_USER:
-    description: 'Git user'
-    required: true
-  GIT_PASS:
-    description: 'Git password'
-    required: true
-  GIT_HUB_TOKEN:
+  GITHUB_TOKEN:
     description: 'GitHub token'
     required: true
 
@@ -30,7 +24,7 @@ runs:
 
     - name: git config
       shell: bash
-      run: |
+      run:
         git config user.name "${{ github.actor }}"
         git config user.email "${{ github.actor }}@users.noreply.github.com"
         git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
