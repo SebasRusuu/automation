@@ -19,9 +19,9 @@ jobs:
 
       - name: Deploy Site
         run: |
-          git config user.name "SebasRusuu"
-          git config user.email "SebasRusuu@users.noreply.github.com"
-          git remote set-url origin https://github.com/SebasRusuu/automation.git
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           make web
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
