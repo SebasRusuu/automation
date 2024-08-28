@@ -13,10 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: test-direcotry
-        run: |
-          ls -l
-          exit 1
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
@@ -28,7 +24,6 @@ jobs:
 
       - name: Run test
         run: |
-          cd java-selenium4/outstanding
           mvn test
           mvn allure:report
 
