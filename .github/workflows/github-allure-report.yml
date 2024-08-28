@@ -86,6 +86,7 @@ jobs:
 
       - name: Publish allure report
         run: |
+          ls -l
           git add artifact-allure-report
           git commit -m "Publish allure report"
           git push
