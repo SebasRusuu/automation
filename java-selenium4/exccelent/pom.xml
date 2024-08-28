@@ -7,10 +7,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>exccelent</artifactId>
-    <name>Archetype - fair</name>
+    <name>Archetype - excellent</name>
     <url>http://maven.apache.org</url>
     <properties>
-        <org.seleniumhq.selenium.version>4.23.0</org.seleniumhq.selenium.version>
+        <org.seleniumhq.selenium.version>4.23.1</org.seleniumhq.selenium.version>
         <com.jackson.core.version>2.17.2</com.jackson.core.version>
         <org.slf4j.version>2.0.13</org.slf4j.version>
         <org.apache.maven.plugins.version>3.4.0</org.apache.maven.plugins.version>

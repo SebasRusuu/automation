@@ -15,7 +15,7 @@ public class CookiePom implements ICookie {
 
     private WebElement mainWebElement;
 
-    private static final By ACCEPT_COOKIES = By.cssSelector("[data-test='handle-accept-all-button']");
+    private static final By ACCEPT_COOKIES = By.cssSelector("cmm-buttons-wrapper [data-test='handle-accept-all-button']");
     private static final By SHADOW_HOST = By.cssSelector("cmm-cookie-banner");
     private static final By COOKIE_BODY = By.cssSelector(".cmm-cookie-banner__wrapper");
 
@@ -25,17 +25,25 @@ public class CookiePom implements ICookie {
 
     @Override
     public void acceptCookies() {
-        // Wait for the shadow host to be present
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.presenceOfElementLocated((SHADOW_HOST)));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        try {
+            // Wait for the shadow host to be present
+            wait.until(ExpectedConditions.presenceOfElementLocated(SHADOW_HOST));
+            WebElement shadowHostElement = driver.findElement(SHADOW_HOST);
 
-        WebElement shadowHostElement = driver.findElement((SHADOW_HOST));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+            // Access the shadow root
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            SearchContext shadowRoot = (SearchContext) js.executeScript("return arguments[0].shadowRoot", shadowHostElement);
 
-        SearchContext shadowRoot = (SearchContext) js.executeScript("return arguments[0].shadowRoot", shadowHostElement);
-        mainWebElement = shadowRoot.findElement((COOKIE_BODY));
-        wait.until(ExpectedConditions.elementToBeClickable(mainWebElement.findElement((ACCEPT_COOKIES)))).click();
+            // Wait for the cookie body to be present within the shadow root
+            wait.until(ExpectedConditions.presenceOfElementLocated(COOKIE_BODY));
+            mainWebElement = shadowRoot.findElement(COOKIE_BODY);
 
+            // Click the accept cookies button
+            wait.until(ExpectedConditions.elementToBeClickable(mainWebElement.findElement(ACCEPT_COOKIES))).click();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to accept cookies: " + e.getMessage(), e);
+        }
     }
 
     public boolean isCookieClosed() {
@@ -43,6 +51,4 @@ public class CookiePom implements ICookie {
         wait.until(ExpectedConditions.not(ExpectedConditions.attributeContains(mainWebElement, "class", "visible")));
         return !mainWebElement.getAttribute("class").contains("visible");
     }
-
-
 }

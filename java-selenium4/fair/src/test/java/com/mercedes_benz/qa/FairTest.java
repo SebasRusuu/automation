@@ -7,23 +7,27 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.*;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 class FairTest {
-
     WebDriver driver;
+    ChromeOptions options;
 
     @BeforeEach
     void setUp() {
-        // Setup WebDriver
-        driver = new ChromeDriver();
+        // Setup ChromeOptions
+        options = new ChromeOptions();
+        options.addArguments("--disable-search-engine-choice-screen");
+
+        // Initialize WebDriver with options
+        driver = new ChromeDriver(options);
     }
 
     @Test
     void testHomePage() throws InterruptedException {
         MbPage mbPage = new MbPage(driver);
-
         mbPage.open();
         CookiePom cookiePom = new CookiePom(driver);
         cookiePom.acceptCookies();
@@ -32,13 +36,13 @@ class FairTest {
         FormPom formPom = new FormPom(driver);
         formPom.fillForm();
         Assertions.assertTrue(formPom.isFormClosed());
-
-
     }
 
     @AfterEach
     void tearDown() {
         // Quit the driver
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }

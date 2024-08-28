@@ -1,0 +1,30 @@
+name: Upload Allure Report
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v2
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+      - name: Run tests
+        run: make test-outstanding
+
+      - name: Download Allure Report
+        uses: ./.github/workflows/github-allure-report.yml
+
+      - name: Upload Website Docusaurus
+        uses: ./.github/workflows/github-run-site.yml
+        with:
+          name: site-artifact
+          upload: current
+          artifact: allure-report

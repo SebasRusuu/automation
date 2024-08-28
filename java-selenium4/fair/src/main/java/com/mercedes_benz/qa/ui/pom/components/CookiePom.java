@@ -9,14 +9,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.logging.Logger;
 
 public class CookiePom implements ICookie {
     private final WebDriver driver;
 
     private WebElement mainWebElement;
 
-    private static final String ACCEPT_COOKIES = "[data-test='handle-accept-all-button']";
+    private static final String ACCEPT_COOKIES = "cmm-buttons-wrapper [data-test='handle-accept-all-button']";
     private static final String SHADOW_HOST = "cmm-cookie-banner";
     private static final String COOKIE_BODY = "cmm-cookie-banner__wrapper";
 

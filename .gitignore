@@ -17,3 +17,5 @@ buildNumber.properties
 .classpath
 .allure
 logs
+
+test-log.log
