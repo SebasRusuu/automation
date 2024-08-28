@@ -28,7 +28,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: artifact-allure-report
-          path: target/site/allure-maven-plugin
+          path: /target/site/allure-maven-plugin
           if-no-files-found: error
           retention-days: 1
           overwrite: true
