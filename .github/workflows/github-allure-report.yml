@@ -60,3 +60,18 @@ jobs:
         env:
           GIT_USER: ${{ secrets.GIT_USER }}
           GIT_PASS: ${{ secrets.GIT_HUB_TOKEN }}
+
+
+  publish-allure-result:
+    needs: site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: artifact-allure-report
+          uses: ./.github/actions/setup/git
+          with:
+            email: 'sebastiaotr.5@gmail.com'
+            name: 'SebasRusuu'
+
+
