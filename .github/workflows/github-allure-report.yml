@@ -67,10 +67,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
+        with:
+          name: artifact-allure-report
+
       - name: artifact-allure-report
         uses: ./.github/actions/setup/git
         with:
             email: 'sebastiaotr.5@gmail.com'
             name: 'SebasRusuu'
+
 
 
