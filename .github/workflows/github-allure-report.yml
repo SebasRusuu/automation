@@ -66,15 +66,24 @@ jobs:
     needs: site
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - uses: actions/download-artifact@v4
         with:
           name: artifact-allure-report
 
-      - name: artifact-allure-report
+      - name: Set up git
         uses: ./.github/actions/setup/git
         with:
-            email: 'sebastiaotr.5@gmail.com'
-            name: 'SebasRusuu'
+          email: 'sebastiaotr.5@gmail.com'
+          name: 'SebasRusuu'
+
+      - name: Checkout repository
+        uses: checkout@v4
+        with:
+          ref: gh-pages
+
 
 
 
