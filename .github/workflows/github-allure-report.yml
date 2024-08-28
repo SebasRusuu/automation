@@ -69,8 +69,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-
-
       - name: Set up git
         uses: ./.github/actions/setup/git
         with:
@@ -85,6 +83,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: artifact-allure-report
+          path: artifact-allure-report
 
       - name: Publish allure report
         run: |
