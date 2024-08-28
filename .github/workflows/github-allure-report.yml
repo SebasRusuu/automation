@@ -57,3 +57,6 @@ jobs:
 
       - name: Deploy site
         run: yarn deploy
+        env:
+          GIT_USER: ${{ secrets.GIT_USER }}
+          GIT_PASS: ${{ secrets.GIT_HUB_TOKEN }}
