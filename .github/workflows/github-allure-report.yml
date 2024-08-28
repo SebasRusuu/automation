@@ -84,6 +84,9 @@ jobs:
         with:
           ref: gh-pages
 
-
-
-
+      - name: Publish allure report
+        run: |
+          ${{ github.workspace }}/artifact-allure-report/* .
+          git add artifact-allure-report
+          git commit -m "Publish allure report"
+          git push
