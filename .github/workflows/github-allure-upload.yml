@@ -1,8 +1,6 @@
 name: Upload Allure Report
 on:
   push:
-    branches:
-      - main
 
 jobs:
   build-and-test:
