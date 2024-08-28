@@ -7,9 +7,16 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: java-selenium4/outstanding
     steps:
       - uses: actions/checkout@v3
 
+      - name: test-direcotry
+        run: |
+          ls -l
+          exit 1
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
@@ -33,3 +40,30 @@ jobs:
           retention-days: 1
           overwrite: true
           compression-level: 6
+
+
+
+
+  site:
+
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    needs: test
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build site
+        run: yarn build
+
+      - name: Deploy site
+        run: yarn deploy
