@@ -30,8 +30,9 @@ jobs:
         run: |
           echo "Running tests on ${{ inputs.browser }}"
           mvn test -Dselenium.browser=${{ inputs.browser }}
-        if: always()
+
       - name: Generate Allure test report
+        if: always()
         run: mvn allure:report
 
       - uses: actions/upload-artifact@v3
