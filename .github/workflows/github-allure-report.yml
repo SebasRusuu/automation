@@ -9,6 +9,11 @@ jobs:
     defaults:
       run:
         working-directory: java-selenium4/outstanding
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [ 'chrome', 'firefox' ]
+
     steps:
       - uses: actions/checkout@v3
 
@@ -21,10 +26,17 @@ jobs:
       - name: Run build
         run: mvn install -DskipTests
 
-      - name: Run test
+      - name: Run tests
         run: |
-          mvn test
+          echo "Running tests on ${{ matrix.browser }}"
+          mvn test -Dselenium.browser=${{ matrix.browser }}
           mvn allure:report
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: ${{ matrix.browser }}
+          path: screenshots/
 
       - uses: actions/upload-artifact@v4
         with:
@@ -87,28 +99,3 @@ jobs:
           git add artifact-allure-report
           git commit -m "Publish allure report"
           git push https://${{secrets.GIT_HUB_TOKEN}}@github.com/sebasrusuu/automation.git
-
-  parallel-tests:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: java-selenium4/outstanding
-    strategy:
-      fail-fast: false
-      matrix:
-        browser: [ 'chrome', 'firefox' ]
-#    services:
- #     selenium:
-  #      image: selenium/standalone-${{ matrix.browser }}
-   #     options: --shm-size=2gb
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run tests
-        run: |
-          echo "Running tests on ${{ matrix.browser }}"
-          mvn test -Dselenium.browser=${{ matrix.browser }}
-      - uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: ${{ matrix.browser }}
-          path: screenshots/
