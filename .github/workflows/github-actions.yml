@@ -1,9 +1,6 @@
 name: github-actions
 
 on:
-  push:
-    branches:
-      - 'qa/outstanding-framework-java'
   pull_request:
     branches:
       - 'qa/outstanding-framework-java'

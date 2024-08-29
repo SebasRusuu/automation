@@ -7,25 +7,26 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-
 class BasicFrameWork1Test {
 
     @Test
     void testHomePage() throws InterruptedException {
-        // Setup WebDriver
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-search-engine-choice-screen");
 
-        // Navigate to the specified URL
+        WebDriver driver = new ChromeDriver(options);
+
         driver.get("https://shop.mercedes-benz.com/en-au/shop/vehicle/srp/demo");
         Thread.sleep(7000); // Wait for the page to load
 
-        //Google
+        // Google
         var shadowHost = driver.findElement(By.cssSelector("cmm-cookie-banner")).getShadowRoot();
         shadowHost.findElement(By.cssSelector("[data-test='handle-accept-all-button']")).click();
 
@@ -35,7 +36,6 @@ class BasicFrameWork1Test {
         Thread.sleep(1000);
 
         driver.findElement(By.cssSelector("[data-test-id='modal-popup__location'] input")).sendKeys("2007");
-
 
         WebElement checkbox = driver.findElement(By.cssSelector("[value='P']"));
         // Using JavaScript Executor to click the checkbox
@@ -48,14 +48,11 @@ class BasicFrameWork1Test {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.attributeContains(By.cssSelector("[data-test-id='modal-popup__location'] .wb-modal-dialog-wrapper"), "style", "display: none;"));
 
-        //display popup none
+        // display popup none
         String attributeValue = driver.findElement(By.cssSelector("[data-test-id='modal-popup__location'] .wb-modal-dialog-wrapper")).getDomAttribute("style");
         Assertions.assertEquals("display: none;", attributeValue);
 
         // Quit the driver
-
         driver.quit();
-
-
     }
 }

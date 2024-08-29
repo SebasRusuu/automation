@@ -133,6 +133,16 @@ public class DriverManager {
     }
 
     /**
+     * Returns the headless mode status.
+     *
+     * @return the headless mode status
+     */
+    public boolean getHeadless() {
+        return seleniumReader.isBrowserHeadless();
+    }
+
+
+    /**
      * Closes the WebDriver instance if it is not null.
      */
     public void close() {

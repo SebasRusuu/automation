@@ -1,6 +1,7 @@
 package com.mercedes_benz.qa;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.ImmutableMap;
 import com.mercedes_benz.qa.hook.TestWatcherHook;
 import com.mercedes_benz.qa.ui.data.Form;
 import com.mercedes_benz.qa.ui.pom.MbPage;
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,6 +28,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
+import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_OK;
 
@@ -33,6 +36,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 @Epic("Automation")
 @Feature("Web")
 @Story("This test is to fill the form")
+@DisplayName("Outstanding Test Allure")
 class OutstandingTest extends TestWatcherHook {
 
     private Form form;
@@ -52,6 +56,7 @@ class OutstandingTest extends TestWatcherHook {
 
         InputStream is = this.getClass().getClassLoader().getResourceAsStream("Data.json");
         StringBuilder jsonString = new StringBuilder();
+
         try (InputStreamReader streamReader = new InputStreamReader(Objects.requireNonNull(is), StandardCharsets.UTF_8);
              BufferedReader reader = new BufferedReader(streamReader)) {
             String line;
@@ -66,6 +71,16 @@ class OutstandingTest extends TestWatcherHook {
         ObjectMapper objectMapper = new ObjectMapper();
         form = objectMapper.readValue(jsonString.toString(), Form.class);
         log("Test setup complete");
+        allureEnvironmentWriter(
+                ImmutableMap.<String, String>builder()
+                        .put("Browser", driverManager.getBrowserType())
+                        .put("Operation System", String.valueOf(((RemoteWebDriver) driverManager.getDriver()).getCapabilities().getPlatformName()))
+                        .put("URL", RestAssured.baseURI)
+                        .put("Country Code", countryCode)
+                        .put("headless", String.valueOf(driverManager.getHeadless()))
+                        .build(), System.getProperty("user.dir") + "/target/allure-results/"
+        );
+
     }
 
     @Test

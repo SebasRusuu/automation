@@ -1,8 +1,19 @@
 name: Run tests and publish report
-on: [push]
+on:
+  - workflow_call
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    continue-on-error: true
+    defaults:
+      run:
+        working-directory: java-selenium4/outstanding
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [ 'chrome', 'firefox' ]
+
     steps:
       - uses: actions/checkout@v3
 
@@ -12,14 +23,86 @@ jobs:
           distribution: 'temurin'
           java-version: 21
 
+      - name: Run build
+        run: mvn install -DskipTests
+
       - name: Run tests
-        run: make test-outstanding
+        run: |
+          echo "Running tests on ${{ matrix.browser }}"
+          mvn test -Dselenium.browser=${{ matrix.browser }}
+        if: always()
+      - name: Generate Allure test report
+        run: mvn allure:report
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: ${{ matrix.browser }}
+          path: screenshots/
 
       - uses: actions/upload-artifact@v4
         with:
-          name: artifact-allure-report
+          name: artifact-allure-report-${{ matrix.browser }}
           path: java-selenium4/outstanding/target/site/allure-maven-plugin
           if-no-files-found: error
           retention-days: 1
           overwrite: true
           compression-level: 6
+
+  site:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    needs: test
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: ./.github/actions/setup
+
+      - name: Build site
+        run: yarn build
+
+      - name: Deploy site
+        run: yarn deploy
+        env:
+          GIT_USER: ${{ secrets.GIT_USER }}
+          GIT_PASS: ${{ secrets.GIT_HUB_TOKEN }}
+
+  publish-allure-result:
+    needs: site
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up git
+        uses: ./.github/actions/setup/git
+        with:
+          email: 'sebastiaotr.5@gmail.com'
+          name: 'SebasRusuu'
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: artifact-allure-report-${{ matrix.browser }}
+          path: artifact-allure-report-${{ matrix.browser }}
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ matrix.browser }}
+          path: artifact-allure-report-${{ matrix.browser }}
+
+      - name: Publish allure report
+        run: |
+          git add artifact-allure-report
+          git commit -m "Publish allure report"
+          git push https://${{secrets.GIT_HUB_TOKEN}}@github.com/sebasrusuu/automation.git

@@ -1,0 +1,21 @@
+name: 'Setup env'
+description: 'Action to setup environment variables'
+author: SebasRusuu
+
+inputs:
+  email:
+    description: 'Email'
+    required: true
+
+  name:
+    description: 'Name'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Configure git
+      shell: bash
+      run: |
+        git config --global user.email "${{ inputs.email }}"
+        git config --global user.name "${{ inputs.name }}"

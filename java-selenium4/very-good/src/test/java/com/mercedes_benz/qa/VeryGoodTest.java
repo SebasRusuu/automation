@@ -50,6 +50,12 @@ class VeryGoodTest {
         form = objectMapper.readValue(jsonString.toString(), Form.class);
 
         String browserName = System.getenv("BROWSER_NAME");
+        if (browserName == null) {
+            browserName = System.getProperty("BROWSER_NAME");
+        }
+        if (browserName == null) {
+            throw new IllegalArgumentException("Browser type cannot be null");
+        }
         Browser browser = parseBrowser(browserName);
         driverManager = new DriverManager(browser);
     }

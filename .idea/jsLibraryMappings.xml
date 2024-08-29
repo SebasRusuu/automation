@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <excludedPredefinedLibrary name="automation/site/.yarn/unplugged/core-js-npm-3.38.1-5a2a3b88ee/node_modules" />
+    <excludedPredefinedLibrary name="automation/site/.yarn/unplugged/core-js-pure-npm-3.38.1-799edd969b/node_modules" />
+    <excludedPredefinedLibrary name="automation/site/.yarn/unplugged/fsevents-patch-6b67494872/node_modules" />
+    <excludedPredefinedLibrary name="automation/site/.yarn/unplugged/node-gyp-npm-10.2.0-cad1109948/node_modules" />
+    <excludedPredefinedLibrary name="automation/site/.yarn/unplugged/open-npm-8.4.2-1f763e8b75/node_modules" />
+  </component>
+</project>

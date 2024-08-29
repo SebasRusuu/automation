@@ -21,17 +21,21 @@ class GoodTest {
 
     @BeforeEach
     void setUp() {
-
         String browserName = System.getenv("BROWSER_NAME");
+        if (browserName == null) {
+            browserName = System.getProperty("BROWSER_NAME");
+        }
+        if (browserName == null) {
+            throw new IllegalArgumentException("Browser type cannot be null");
+        }
         Browser browser = parseBrowser(browserName);
         driverManager = new DriverManager(browser);
         driver = driverManager.getDriver();
     }
-
     @Test
     void testHomePage() throws InterruptedException {
         MbPage mbPage = new MbPage(driver);
-        mbPage.get();
+        mbPage.get().openBrowser();
 
         CookiePom cookiePom = new CookiePom(driver);
         cookiePom.acceptCookies();

@@ -6,7 +6,7 @@
         <artifactId>java-selenium4</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>good</artifactId>
-    <name>Archetype - fair</name>
+    <artifactId>Good</artifactId>
+    <name>Archetype - Good</name>
     <url>http://maven.apache.org</url>
 </project>
