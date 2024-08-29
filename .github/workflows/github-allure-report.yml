@@ -3,7 +3,6 @@ on:
   - push
   - workflow_call
 
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -36,11 +35,7 @@ jobs:
           overwrite: true
           compression-level: 6
 
-
-
-
   site:
-
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -60,7 +55,6 @@ jobs:
         env:
           GIT_USER: ${{ secrets.GIT_USER }}
           GIT_PASS: ${{ secrets.GIT_HUB_TOKEN }}
-
 
   publish-allure-result:
     needs: site
@@ -93,28 +87,31 @@ jobs:
           git add artifact-allure-report
           git commit -m "Publish allure report"
           git push https://${{secrets.GIT_HUB_TOKEN}}@github.com/sebasrusuu/automation.git
-  
 
-  browserstack:
+  parallel-tests:
     runs-on: ubuntu-latest
-
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [ 'chrome', 'firefox', 'edge' ]
+    services:
+      selenium:
+        image: selenium/standalone-${{ matrix.browser }}
+        options: --shm-size=2gb
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '19'
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Install BrowserStack CLI
-        run: npm install -g browserstack-cli
-
-      - name: Run BrowserStack tests
-        run: browserstack-cypress run --sync --config-file .github/browsertack/browserstack.yml
-        env:
-          GIT_USER: ${{ secrets.GIT_USER }}
-          GIT_PASS: ${{ secrets.GIT_HUB_TOKEN }}
+      - name: Run tests
+        run: |
+          echo "Running tests on ${{ matrix.browser }}"
+          yarn test --browser ${{ matrix.browser }}
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: ${{ matrix.browser }}
+          path: screenshots/
