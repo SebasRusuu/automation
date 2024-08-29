@@ -28,8 +28,8 @@ jobs:
 
       - name: Run tests
         run: |
-          echo "Running tests on ${{ input.browser }}"
-          mvn test -Dselenium.browser=${{ input.browser }}
+          echo "Running tests on ${{ inputs.browser }}"
+          mvn test -Dselenium.browser=${{ inputs.browser }}
         if: always()
       - name: Generate Allure test report
         run: mvn allure:report
@@ -37,12 +37,12 @@ jobs:
       - uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: ${{ input.browser }}
+          name: ${{ inputs.browser }}
           path: screenshots/
 
       - uses: actions/upload-artifact@yt
         with:
-          name: artifact-allure-report-${{ input.browser }}
+          name: artifact-allure-report-${{ inputs.browser }}
           path: java-selenium4/outstanding/target/site/allure-maven-plugin
           if-no-files-found: error
           retention-days: 1

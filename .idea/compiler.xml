@@ -14,8 +14,12 @@
         <module name="garbage" />
         <module name="very-good" />
         <module name="fair" />
+        <module name="Good" />
         <module name="good" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="good" target="21" />
+    </bytecodeTargetLevel>
   </component>
 </project>
