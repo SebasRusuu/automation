@@ -1,2 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Thu Aug 29 08:52:54 UTC 2024","Thu Aug 29 08:53:21 UTC 2024","26960","","com.mercedes_benz.qa.OutstandingTest","","com.mercedes_benz.qa.OutstandingTest","testHomePage","Web Test - Fill Form","Test accept cookies, fill the form and confirm it"
