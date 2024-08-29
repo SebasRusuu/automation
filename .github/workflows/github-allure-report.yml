@@ -90,6 +90,9 @@ jobs:
 
   parallel-tests:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: java-selenium4/outstanding
     strategy:
       fail-fast: false
       matrix:
