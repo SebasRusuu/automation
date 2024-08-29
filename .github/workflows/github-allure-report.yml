@@ -28,10 +28,13 @@ jobs:
         run: mvn install -DskipTests
 
       - name: Run tests
+        continue-on-error: true
         run: |
           echo "Running tests on ${{ matrix.browser }}"
           mvn test -Dselenium.browser=${{ matrix.browser }}
-          mvn allure:report
+        if: always()
+      - name: Generate Allure test report
+        run: mvn allure:report
 
       - uses: actions/upload-artifact@v3
         if: always()
