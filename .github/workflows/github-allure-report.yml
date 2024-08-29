@@ -65,6 +65,9 @@ jobs:
   publish-allure-result:
     needs: site
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -87,7 +90,6 @@ jobs:
 
       - name: Publish allure report
         run: |
-          git remote set-url origin https://${{secrets.GIT_HUB_TOKEN}}@github.com/sebasrusuu/automation.git
           git add artifact-allure-report
           git commit -m "Publish allure report"
-          git push origin gh-pages
+          git push https://${{secrets.GIT_HUB_TOKEN}}@github.com/sebasrusuu/automation.git
