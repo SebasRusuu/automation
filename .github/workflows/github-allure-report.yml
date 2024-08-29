@@ -93,3 +93,28 @@ jobs:
           git add artifact-allure-report
           git commit -m "Publish allure report"
           git push https://${{secrets.GIT_HUB_TOKEN}}@github.com/sebasrusuu/automation.git
+  
+
+  browserstack:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install BrowserStack CLI
+        run: npm install -g browserstack-cli
+
+      - name: Run BrowserStack tests
+        run: browserstack-cypress run --sync --config-file .github/browsertack/browserstack.yml
+        env:
+          GIT_USER: ${{ secrets.GIT_USER }}
+          GIT_PASS: ${{ secrets.GIT_HUB_TOKEN }}
