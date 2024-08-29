@@ -1,6 +1,5 @@
 name: Run tests and publish report
 on:
-  - push
   - workflow_call
 
 jobs:
@@ -28,7 +27,6 @@ jobs:
         run: mvn install -DskipTests
 
       - name: Run tests
-        continue-on-error: true
         run: |
           echo "Running tests on ${{ matrix.browser }}"
           mvn test -Dselenium.browser=${{ matrix.browser }}
@@ -96,12 +94,12 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: artifact-allure-report-${{ matrix.browser }}
-          path: artifact-allure-report
+          path: artifact-allure-report-${{ matrix.browser }}
 
       - uses: actions/download-artifact@v4
         with:
-          name: artifact-allure-report-${{ matrix.browser }}
-          path: artifact-allure-report
+          name: ${{ matrix.browser }}
+          path: artifact-allure-report-${{ matrix.browser }}
 
       - name: Publish allure report
         run: |
