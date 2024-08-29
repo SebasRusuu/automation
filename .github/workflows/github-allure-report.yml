@@ -96,24 +96,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        browser: [ 'chrome', 'firefox', 'edge' ]
-    services:
-      selenium:
-        image: selenium/standalone-${{ matrix.browser }}
-        options: --shm-size=2gb
+        browser: [ 'chrome', 'firefox' ]
+#    services:
+ #     selenium:
+  #      image: selenium/standalone-${{ matrix.browser }}
+   #     options: --shm-size=2gb
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '19'
-
+      - uses: actions/checkout@v4
       - name: Run tests
         run: |
           echo "Running tests on ${{ matrix.browser }}"
-          yarn install
-          yarn test --browser ${{ matrix.browser }}
+          mvn test -Dselenium.browser=${{ matrix.browser }}
       - uses: actions/upload-artifact@v3
         if: always()
         with:
