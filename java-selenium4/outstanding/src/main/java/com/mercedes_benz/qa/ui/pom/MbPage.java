@@ -66,7 +66,7 @@ public class MbPage extends LoadableComponent<MbPage> {
     protected void isLoaded() throws Error {
         String url = driver.getCurrentUrl();
         if (!url.contains("/shop/vehicle/srp/demo")) {
-            throw new Error("The page is not loaded"); // this method throws Exception
+            throw new Error("The page is not loaded. Current url:" +url); // this method throws Exception
         }
     }
 
