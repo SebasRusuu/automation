@@ -91,7 +91,12 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: artifact-allure-report
+          name: artifact-allure-report ${{ matrix.browser }}
+          path: artifact-allure-report
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: artifact-allure-report ${{ matrix.browser }}
           path: artifact-allure-report
 
       - name: Publish allure report
