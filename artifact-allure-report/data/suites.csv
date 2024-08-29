@@ -1,0 +1,2 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Thu Aug 29 14:37:52 UTC 2024","Thu Aug 29 14:38:19 UTC 2024","26133","","Outstanding Test Allure","","com.mercedes_benz.qa.OutstandingTest","testHomePage","Web Test - Fill Form","Test accept cookies, fill the form and confirm it"
