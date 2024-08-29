@@ -112,6 +112,7 @@ jobs:
       - name: Run tests
         run: |
           echo "Running tests on ${{ matrix.browser }}"
+          yarn install
           yarn test --browser ${{ matrix.browser }}
       - uses: actions/upload-artifact@v3
         if: always()
