@@ -5,21 +5,13 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    defaults:
-      run:
-        working-directory: java-selenium4/outstanding
     strategy:
       fail-fast: false
       matrix:
         browser: [ 'chrome', 'firefox' ]
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/workflows/github-web-run.yml
-        with:
-          browser: ${{ matrix.browser }}
+    uses: ./.github/workflows/github-web-run.yml
+    with:
+     browser: ${{ matrix.browser }}
 
   site:
     runs-on: ubuntu-latest
@@ -28,7 +20,7 @@ jobs:
         working-directory: site
     needs: test
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: ./.github/actions/setup
