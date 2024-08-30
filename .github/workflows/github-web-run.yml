@@ -80,7 +80,7 @@ jobs:
           name: artifact-allure-report-${{ inputs.browser_name }}
           path: java-selenium4/outstanding/artifact-allure-report-${{ inputs.browser_name }}
 
-        name: Set Allure Report URL
+      - name: Set Allure Report URL
         run: echo "ALLURE_URL=https://sebasrusuu.github.io/automation/java-selenium4/outstanding/artifact-allure-report-${{ inputs.browser_name }}" >> $GITHUB_ENV
 
       - name: Publish allure report
