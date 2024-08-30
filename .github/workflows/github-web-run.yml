@@ -74,7 +74,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: artifact-allure-report-${{ inputs.browser_name }}
-          path: artifact-allure-report-${{ inputs.browser_name }}
+          path: java-selenium4/outstanding/artifact-allure-report-${{ inputs.browser_name }}
 
       - name: Publish allure report
         run: |
