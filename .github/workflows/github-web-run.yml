@@ -67,10 +67,15 @@ jobs:
         with:
           ref: gh-pages
 
+      - uses: actions/download-artifact@v4
+        with:
+          name: artifact-allure-report-${{ inputs.browser_name }}
+          path: artifact-allure-report-${{ inputs.browser_name }}
+
       - name: Publish allure report
         run: |
           git add artifact-allure-report-${{ inputs.browser_name }}
-          git commit -m "Publish allure report"
+          git commit -m "Publish allure report ${{ inputs.browser_name }}"
           git push https://${{secrets.GIT_HUB_TOKEN}}@github.com/sebasrusuu/automation.git
 
 
