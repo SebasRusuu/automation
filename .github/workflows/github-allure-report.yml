@@ -1,6 +1,7 @@
 name: Run tests and publish report
 on:
   - workflow_call
+  - workflow_dispatch
 
 jobs:
   test:
@@ -15,39 +16,9 @@ jobs:
         browser: [ 'chrome', 'firefox' ]
 
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
+      - uses: ./.github/workflows/github-web-run.yml
         with:
-          distribution: 'temurin'
-          java-version: 21
-
-      - name: Run build
-        run: mvn install -DskipTests
-
-      - name: Run tests
-        run: |
-          echo "Running tests on ${{ inputs.browser }}"
-          mvn test -Dselenium.browser=${{ inputs.browser }}
-        if: always()
-      - name: Generate Allure test report
-        run: mvn allure:report
-
-      - uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: ${{ inputs.browser }}
-          path: screenshots/
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: artifact-allure-report-${{ inputs.browser }}
-          path: java-selenium4/outstanding/target/site/allure-maven-plugin
-          if-no-files-found: error
-          retention-days: 1
-          overwrite: true
-          compression-level: 6
+          browser: ${{ matrix.browser }}
 
   site:
     runs-on: ubuntu-latest
