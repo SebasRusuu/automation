@@ -80,15 +80,15 @@ jobs:
           name: artifact-allure-report-${{ inputs.browser_name }}
           path: java-selenium4/outstanding/artifact-allure-report-${{ inputs.browser_name }}
 
-      #- name: Set Allure Report URL
-      # run: echo "ALLURE_URL=https://sebasrusuu.github.io/automation/java-selenium4/outstanding/artifact-allure-report-${{ inputs.browser_name }}" >> $GITHUB_ENV
+        name: Set Allure Report URL
+        run: echo "ALLURE_URL=https://sebasrusuu.github.io/automation/java-selenium4/outstanding/artifact-allure-report-${{ inputs.browser_name }}" >> $GITHUB_ENV
 
       - name: Publish allure report
         run: |
           git add artifact-allure-report-${{ inputs.browser_name }}
           git commit -m "Publish allure report ${{ inputs.browser_name }}"
           git push https://${{secrets.GIT_HUB_TOKEN}}@github.com/sebasrusuu/automation.git
-          echo "Allure report url: ${{ env.allure_url }}"
+          echo "Allure report url: ${{ env.ALLURE_URL }}"
           
 
 
