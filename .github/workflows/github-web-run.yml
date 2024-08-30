@@ -53,16 +53,17 @@ jobs:
           overwrite: true
           compression-level: 6
 
-      - name: git config
-        uses: ./.github/actions/setup/git
-        with:
-          email: 'sebastiaotr.5@gmail.com'
-          name: 'SebasRusuu'
 
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           ref: gh-pages
+
+      - name: git config
+        uses: ./.github/actions/setup/git
+        with:
+          email: 'sebastiaotr.5@gmail.com'
+          name: 'SebasRusuu'
 
       - name: Publish allure report
         run: |
