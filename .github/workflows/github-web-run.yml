@@ -23,7 +23,9 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-      url: 'https://sebasrusuu.github.io/automation/java-selenium4/outstanding/artifact-allure-report-${{ inputs.browser_name }}"'
+    environment:
+      name: 'Allure url'
+      url: https://sebasrusuu.github.io/automation/java-selenium4/outstanding/artifact-allure-report-${{ inputs.browser_name }}"
 
     defaults:
       run:
