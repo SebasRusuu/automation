@@ -65,7 +65,6 @@ jobs:
           ref: gh-pages
 
       - name: Publish allure report
-
         run: |
           git add artifact-allure-report-${{ inputs.browser_name }}
           git commit -m "Publish allure report"
