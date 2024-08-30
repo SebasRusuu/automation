@@ -12,6 +12,9 @@ jobs:
     uses: ./.github/workflows/github-web-run.yml
     with:
       browser_name: ${{ matrix.browser }}
+    permissions:
+      contents: write
+      pull-requests: write
 
   site:
     runs-on: ubuntu-latest
