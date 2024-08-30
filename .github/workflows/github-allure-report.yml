@@ -16,6 +16,7 @@ jobs:
         browser: [ 'chrome', 'firefox' ]
 
     steps:
+      - uses: actions/checkout@v4
       - uses: ./.github/workflows/github-web-run.yml
         with:
           browser: ${{ matrix.browser }}
