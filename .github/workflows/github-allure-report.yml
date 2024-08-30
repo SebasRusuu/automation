@@ -22,6 +22,9 @@ jobs:
       run:
         working-directory: site
     needs: parallel-test
+    environment:
+      name: docs_url
+      url: https://sebasrusuu.github.io/automation/java-selenium4/outstanding
     steps:
       - uses: actions/checkout@v4
 
@@ -32,7 +35,9 @@ jobs:
         run: yarn build
 
       - name: Deploy site
-        run: yarn deploy
+        run: | 
+            yarn deploy
+            echo "Docs url: ${{ env.DOCS_URL }}"
         env:
           GIT_USER: ${{ secrets.GIT_USER }}
           GIT_PASS: ${{ secrets.GIT_HUB_TOKEN }}
@@ -45,10 +50,9 @@ jobs:
       pull-requests: write
     environment:
       name: allure_url
-      url: https://sebasrusuu.github.io/automation/java-selenium4/outstanding/artifact-allure-report-${{ matrix.browser_name }}
+      url: https://sebasrusuu.github.io/automation/java-selenium4/outstanding/artifact-allure-report-${{ inputs.browser_name }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           ref: gh-pages
 
@@ -60,16 +64,15 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: artifact-allure-report-${{ matrix.browser }}
-          path: java-selenium4/outstanding/artifact-allure-report-${{ matrix.browser }}
+          name: artifact-allure-report-${{ inputs.browser }}
+          path: java-selenium4/outstanding/artifact-allure-report-${{ inputs.browser }}
 
       - name: Set Allure Report URL
         run: echo "ALLURE_URL=https://sebasrusuu.github.io/automation/java-selenium4/outstanding/artifact-allure-report-${{ matrix.browser }}" >> $GITHUB_ENV
 
       - name: Publish allure report
         run: |
-          git add artifact-allure-report-${{ matrix.browser }}
-          git commit -m "Publish allure report ${{ matrix.browser }}"
+          git add artifact-allure-report-${{ inputs.browser }}
+          git commit -m "Publish allure report ${{ inputs.browser }}"
           git push https://${{ secrets.GIT_HUB_TOKEN }}@github.com/sebasrusuu/automation.git
-          echo "Allure report url: ${{ env.ALLURE_URL }}"
-          
+          echo "Allure report url: ${{ env.ALLURE_URL }}"        
