@@ -4,7 +4,7 @@ on:
   - workflow_dispatch
 
 jobs:
-  prallel-test:
+  parallel-test:
     strategy:
       fail-fast: false
       matrix:
@@ -18,7 +18,7 @@ jobs:
     defaults:
       run:
         working-directory: site
-    needs: test
+    needs: parallel-test
     steps:
       - uses: actions/checkout@v4
 
@@ -46,6 +46,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: gh-pages
 
       - name: Set up git
         uses: ./.github/actions/setup/git
@@ -53,26 +55,17 @@ jobs:
           email: 'sebastiaotr.5@gmail.com'
           name: 'SebasRusuu'
 
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          ref: gh-pages
-
       - uses: actions/download-artifact@v4
         with:
-          name: ${{ inputs.browser }}
-          path: artifact-allure-report-${{ inputs.browser }}
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: ${{ inputs.browser }}
+          name: artifact-allure-report-${{ inputs.browser }}
           path: artifact-allure-report-${{ inputs.browser }}
 
       - name: Set Allure Report URL
-        run: echo "ALLURE_URL=https://sebasrusuu.github.io/automation/java-selenium4/outstanding/artifact-allure-report-${{ inputs.browser_name }}" >> $GITHUB_ENV
+        run: echo "ALLURE_URL=https://sebasrusuu.github.io/automation/java-selenium4/outstanding/artifact-allure-report-${{ matrix.browser }}" >> $GITHUB_ENV
 
       - name: Publish allure report
         run: |
-          git add artifact-allure-report
-          git commit -m "Publish allure report"
-          git push https://${{secrets.GIT_HUB_TOKEN}}@github.com/sebasrusuu/automation.git
+          git add artifact-allure-report-${{ inputs.browser }}
+          git commit -m "Publish allure report ${{ inputs.browser }}"
+          git push https://${{ secrets.GIT_HUB_TOKEN }}@github.com/sebasrusuu/automation.git
+          echo "Allure report url: ${{ env.ALLURE_URL }}"
