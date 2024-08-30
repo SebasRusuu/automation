@@ -49,6 +49,11 @@ jobs:
           retention-days: 1
           overwrite: true
           compression-level: 6
+      - name: git config
+        uses: ./.github/actions/setup/git
+        with:
+          email: 'sebastiaotr.5@gmail.com'
+          name: 'SebasRusuu'
 
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -56,10 +61,6 @@ jobs:
           ref: gh-pages
 
       - name: Publish allure report
-        uses: ./.github/actions/setup/git
-        with:
-          email: 'sebastiaotr.5@gmail.com'
-          name: 'SebasRusuu'
         run: |
           git add artifact-allure-report
           git commit -m "Publish allure report"
