@@ -44,38 +44,37 @@ jobs:
           GIT_USER: ${{ secrets.GIT_USER }}
           GIT_PASS: ${{ secrets.GIT_HUB_TOKEN }}
 
-  publish-allure-result:
-    needs: site
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-    environment:
-      name: allure_url
-      url: https://sebasrusuu.github.io/automation/java-selenium4/outstanding/artifact-allure-report-${{ inputs.browser_name }}
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          ref: gh-pages
+ # publish-allure-result:
+ #   needs: site
+ #   runs-on: ubuntu-latest
+ #   permissions:
+ #     contents: write
+ #     pull-requests: write
+ #   environment:
+ #     name: allure_url
+ #    url: https://sebasrusuu.github.io/automation/java-selenium4/outstanding/artifact-allure-report-${{ inputs.browser_name }}
+ #   steps:
+  #    - name: Checkout repository
+   #     uses: actions/checkout@v4
+    #    with:
+     #     ref: gh-pages
 
-      - name: Set up git
-        uses: ./.github/actions/setup/git
-        with:
-          email: 'sebastiaotr.5@gmail.com'
-          name: 'SebasRusuu'
+      #- name: Set up git
+       # uses: ./.github/actions/setup/git
+        #with:
+         # email: 'sebastiaotr.5@gmail.com'
+          #name: 'SebasRusuu'
 
-      - uses: actions/download-artifact@v4
-        with:
-          name: artifact-allure-report-${{ inputs.browser }}
-          path: java-selenium4/outstanding/artifact-allure-report-${{ inputs.browser }}
+      #- uses: actions/download-artifact@v4
+        #with:
+       #   name: artifact-allure-report-${{ inputs.browser }}
+         # path: java-selenium4/outstanding/artifact-allure-report-${{ inputs.browser }}
 
-      - name: Set Allure Report URL
-        run: echo "ALLURE_URL=https://sebasrusuu.github.io/automation/java-selenium4/outstanding/artifact-allure-report-${{ matrix.browser }}" >> $GITHUB_ENV
+      #- name: Set Allure Report URL
+       # run: echo "ALLURE_URL=https://sebasrusuu.github.io/automation/java-selenium4/outstanding/artifact-allure-report-${{ matrix.browser }}" >> $GITHUB_ENV
 
-      - name: Publish allure report
-        run: |
-          git add artifact-allure-report-${{ inputs.browser }}
-          git commit -m "Publish allure report ${{ inputs.browser }}"
-          git push https://${{ secrets.GIT_HUB_TOKEN }}@github.com/sebasrusuu/automation.git
-          echo "Allure report url: ${{ env.ALLURE_URL }}"        
+      #- name: Publish allure report
+       # run: |
+        ## git commit -m "Publish allure report ${{ inputs.browser }}"
+          #git push https://${{ secrets.GIT_HUB_TOKEN }}@github.com/sebasrusuu/automation.git
+          #echo "Allure report url: ${{ env.ALLURE_URL }}"
