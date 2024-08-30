@@ -37,7 +37,7 @@ jobs:
       - name: Deploy site
         run: | 
             yarn deploy
-            echo "Docs url: ${{ jobs.docs_url.url }}"
+            echo "Docs url: ${{ docs_url.url }}"
         env:
           GIT_USER: ${{ secrets.GIT_USER }}
           GIT_PASS: ${{ secrets.GIT_HUB_TOKEN }}
