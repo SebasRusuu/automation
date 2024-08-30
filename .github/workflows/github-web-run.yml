@@ -50,4 +50,19 @@ jobs:
           overwrite: true
           compression-level: 6
 
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - name: Publish allure report
+        uses: ./.github/actions/setup/git
+        with:
+          email: 'sebastiaotr.5@gmail.com'
+          name: 'SebasRusuu'
+        run: |
+          git add artifact-allure-report
+          git commit -m "Publish allure report"
+          git push https://${{secrets.GIT_HUB_TOKEN}}@github.com/sebasrusuu/automation.git
+
 

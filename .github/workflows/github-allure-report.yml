@@ -4,14 +4,14 @@ on:
   - workflow_dispatch
 
 jobs:
-  test:
+  prallel-test:
     strategy:
       fail-fast: false
       matrix:
         browser: [ 'chrome', 'firefox' ]
     uses: ./.github/workflows/github-web-run.yml
     with:
-     browser_name: ${{ matrix.browser }}
+      browser_name: ${{ matrix.browser }}
 
   site:
     runs-on: ubuntu-latest
@@ -57,7 +57,7 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: artifact-allure-report-${{ inputs.browser }}
+          name: ${{ inputs.browser }}
           path: artifact-allure-report-${{ inputs.browser }}
 
       - uses: actions/download-artifact@v4
