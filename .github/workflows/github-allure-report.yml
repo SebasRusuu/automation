@@ -24,7 +24,7 @@ jobs:
     needs: parallel-test
     environment:
       name: docs_url
-      url: https://sebasrusuu.github.io/automation/java-selenium4/outstanding
+      url: https://sebasrusuu.github.io/automation/
     steps:
       - uses: actions/checkout@v4
 
