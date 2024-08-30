@@ -11,7 +11,7 @@ jobs:
         browser: [ 'chrome', 'firefox' ]
     uses: ./.github/workflows/github-web-run.yml
     with:
-     browser: ${{ matrix.browser }}
+     browser_name: ${{ matrix.browser }}
 
   site:
     runs-on: ubuntu-latest
