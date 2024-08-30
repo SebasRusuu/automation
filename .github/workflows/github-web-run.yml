@@ -5,11 +5,11 @@ on:
       browser_name:
         required: true
         description: 'Browser to run tests against'
-
   workflow_call:
     inputs:
       browser_name:
         required: true
+        type: string
         description: 'Browser to run tests against'
 
 jobs:
