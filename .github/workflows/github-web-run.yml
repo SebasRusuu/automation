@@ -24,7 +24,7 @@ jobs:
       contents: write
       pull-requests: write
     environment:
-      name: 'Allure url'
+      name: allure_url
       url: https://sebasrusuu.github.io/automation/java-selenium4/outstanding/artifact-allure-report-${{ inputs.browser_name }}"
 
     defaults:
@@ -85,7 +85,7 @@ jobs:
           git add artifact-allure-report-${{ inputs.browser_name }}
           git commit -m "Publish allure report ${{ inputs.browser_name }}"
           git push https://${{secrets.GIT_HUB_TOKEN}}@github.com/sebasrusuu/automation.git
-          echo "Allure report url: ${{environment.url}}"
+          echo "Allure report url: ${{ jobs.allure_url.url}}"
           
 
 
