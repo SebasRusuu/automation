@@ -40,6 +40,9 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+    environment:
+      name: allure_url
+      url: https://sebasrusuu.github.io/automation/java-selenium4/outstanding/artifact-allure-report-${{ inputs.browser_name }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -64,6 +67,9 @@ jobs:
         with:
           name: ${{ inputs.browser }}
           path: artifact-allure-report-${{ inputs.browser }}
+
+      - name: Set Allure Report URL
+        run: echo "ALLURE_URL=https://sebasrusuu.github.io/automation/java-selenium4/outstanding/artifact-allure-report-${{ inputs.browser_name }}" >> $GITHUB_ENV
 
       - name: Publish allure report
         run: |
